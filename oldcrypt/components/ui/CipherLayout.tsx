@@ -32,41 +32,55 @@ export default function CipherLayout({
   };
 
   return (
-    <div className="min-h-screen bg-[#f7f7f5] flex flex-col">
+    <div className="min-h-screen flex flex-col font-dm-sans overflow-x-hidden">
       {/* Navbar */}
-      <nav className="bg-white border-b border-gray-100 px-8 py-3 flex items-center gap-8 sticky top-0 z-10">
-        <span className="text-[#2d6a2d] font-bold text-lg tracking-tight font-mono">
-          OldCrypt
-        </span>
-        <button
-          onClick={() => onModeChange("encrypt")}
-          className={`text-sm font-medium pb-1 border-b-2 transition-colors ${
-            mode === "encrypt"
-              ? "border-[#4caf50] text-[#4caf50]"
-              : "border-transparent text-gray-500 hover:text-gray-800"
-          }`}
-        >
-          Enkode
-        </button>
-        <button
-          onClick={() => onModeChange("decrypt")}
-          className={`text-sm font-medium pb-1 border-b-2 transition-colors ${
-            mode === "decrypt"
-              ? "border-[#4caf50] text-[#4caf50]"
-              : "border-transparent text-gray-500 hover:text-gray-800"
-          }`}
-        >
-          Dekode
-        </button>
+      <nav className="bg-white border-b border-gray-100 sticky top-0 z-10">
+        <div className="flex items-center gap-6 px-4 sm:px-6 lg:px-8 py-4">
+          <span className="text-[#275105] text-xl font-medium tracking-tight font-playfair">
+            OldCrypt
+          </span>
+
+          <div className="flex items-center gap-6">
+            <button
+              onClick={() => onModeChange("encrypt")}
+              className={`text-sm font-medium pb-1 border-b-2 font-dm-sans transition-colors ${
+                mode === "encrypt"
+                  ? "border-[#4caf50] text-[#4caf50]"
+                  : "border-transparent text-gray-500 hover:text-gray-800"
+              }`}
+            >
+              Enkode
+            </button>
+            <button
+              onClick={() => onModeChange("decrypt")}
+              className={`text-sm font-medium pb-1 border-b-2 transition-colors ${
+                mode === "decrypt"
+                  ? "border-[#4caf50] text-[#4caf50]"
+                  : "border-transparent text-gray-500 hover:text-gray-800"
+              }`}
+            >
+              Dekode
+            </button>
+          </div>
+        </div>
       </nav>
 
-      <div className="flex flex-1">
+      <div className="w-full grid grid-cols-1 md:grid-cols-4 bg-white flex-1">
         {/* Left panel */}
-        <div className="flex-1 max-w-2xl px-10 py-8 flex flex-col gap-6">
+        <div className="md:col-span-3 md:w-3/4 w-full flex flex-col gap-6 px-4 sm:px-6 lg:px-8 py-6 md:py-8">
           {/* Title */}
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-orange-400 flex items-center justify-center text-white text-xl">
-              {icon ?? "🔐"}
+            <div className="w-12 h-12 rounded-lg bg-orange-400 flex items-center justify-center text-white text-xl shrink-0">
+              <svg
+                className="fill-[#FFF3C7]"
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                fill="#000000"
+                viewBox="0 0 256 256"
+              >
+                <path d="M200,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V40A16,16,0,0,0,200,24ZM88,200a12,12,0,1,1,12-12A12,12,0,0,1,88,200Zm0-40a12,12,0,1,1,12-12A12,12,0,0,1,88,160Zm40,40a12,12,0,1,1,12-12A12,12,0,0,1,128,200Zm0-40a12,12,0,1,1,12-12A12,12,0,0,1,128,160Zm40,40a12,12,0,1,1,12-12A12,12,0,0,1,168,200Zm0-40a12,12,0,1,1,12-12A12,12,0,0,1,168,160Zm16-56a8,8,0,0,1-8,8H80a8,8,0,0,1-8-8V64a8,8,0,0,1,8-8h96a8,8,0,0,1,8,8Z"></path>
+              </svg>
             </div>
             <h1 className="text-2xl font-semibold text-gray-900">{title}</h1>
           </div>
@@ -75,38 +89,42 @@ export default function CipherLayout({
         </div>
 
         {/* Right panel */}
-        <div className="w-[380px] bg-white border-l border-gray-100 px-8 py-10 flex flex-col gap-6">
+        <aside className="md:col-span-1 w-full border-t md:border-t-0 md:border-l border-gray-100 px-4 sm:px-6 lg:px-8 py-6 md:py-10 flex flex-col gap-6">
           <div>
-            <p className="text-sm text-gray-400 mb-3">
+            <p className="text-sm text-[#6D6D6D] mb-3 text-center font-medium">
               {mode === "encrypt" ? "Ciphertext" : "Plaintext"}
             </p>
-            <div className="relative bg-[#f0f7f0] rounded-xl p-5 min-h-[130px]">
-              <p className="text-[#4a8c4a] font-mono text-base break-all leading-relaxed">
+
+            <div className="relative bg-[#F2F9EE] rounded-xl p-5 min-h-[130px]">
+              <p className="text-[#5F9F35] font-medium font-mono text-base break-words leading-relaxed">
                 {output || (
-                  <span className="text-gray-300 italic">
-                    hasil akan muncul di sini...
+                  <span className="text-[#A9A9A9] italic font-dm-sans">
+                    Hasil akan muncul di sini...
                   </span>
                 )}
               </p>
+
               {output && (
                 <button
                   onClick={handleCopy}
-                  className="absolute top-3 right-3 text-gray-400 hover:text-green-600 transition-colors"
+                  className="absolute top-3 right-3 text-gray-400 hover:text-[#51A608] cursor-pointer transition-colors"
                 >
                   {copied ? <Check size={16} /> : <Copy size={16} />}
                 </button>
               )}
             </div>
           </div>
-          {extra}
-        </div>
-      </div>
 
-      <footer className="text-right text-xs text-gray-400 px-8 py-4">
-        Made with ❤️ by Faiza
-        <br />
-        21120123140056
-      </footer>
+          {extra}
+
+          {/* Footer: aman di semua ukuran layar */}
+          <footer className="mt-auto text-right text-xs text-gray-400 pt-6">
+            Made with ❤️ by Faiza
+            <br />
+            21120123140056
+          </footer>
+        </aside>
+      </div>
     </div>
   );
 }
