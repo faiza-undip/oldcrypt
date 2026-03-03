@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Copy, Check } from "lucide-react";
+import Image from "next/image";
 
 interface CipherLayoutProps {
   title: string;
@@ -35,17 +36,27 @@ export default function CipherLayout({
     <div className="min-h-screen flex flex-col font-dm-sans overflow-x-hidden">
       {/* Navbar */}
       <nav className="bg-white border-b border-gray-100 sticky top-0 z-10">
-        <div className="flex items-center gap-6 px-4 sm:px-6 lg:px-8 py-4">
-          <span className="text-[#275105] text-xl font-medium tracking-tight font-playfair">
-            OldCrypt
-          </span>
+        <div className="flex items-center gap-12 px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex flex-row items-center">
+            <Image
+              className="mr-3 w-10 h-10"
+              src="/oldcrypt-logo.png"
+              height={1920}
+              width={1080}
+              unoptimized
+              alt="OldCrypt logo"
+            />
+            <span className="text-[#275105] text-xl font-medium tracking-tight font-playfair">
+              OldCrypt
+            </span>
+          </div>
 
           <div className="flex items-center gap-6">
             <button
               onClick={() => onModeChange("encrypt")}
-              className={`text-sm font-medium pb-1 border-b-2 font-dm-sans transition-colors ${
+              className={`text-sm font-medium pb-1 border-b-2 font-dm-sans transition-colors cursor-pointer ${
                 mode === "encrypt"
-                  ? "border-[#4caf50] text-[#4caf50]"
+                  ? "border-[#559520] text-[#559520]"
                   : "border-transparent text-gray-500 hover:text-gray-800"
               }`}
             >
@@ -53,9 +64,9 @@ export default function CipherLayout({
             </button>
             <button
               onClick={() => onModeChange("decrypt")}
-              className={`text-sm font-medium pb-1 border-b-2 transition-colors ${
+              className={`text-sm font-medium pb-1 border-b-2 transition-colors cursor-pointer ${
                 mode === "decrypt"
-                  ? "border-[#4caf50] text-[#4caf50]"
+                  ? "border-[#559520] text-[#559520]"
                   : "border-transparent text-gray-500 hover:text-gray-800"
               }`}
             >

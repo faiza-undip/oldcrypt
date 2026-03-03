@@ -165,7 +165,7 @@ export default function EnigmaCipher() {
             <label className="block text-sm text-[#848484] font-medium mb-1">
               Position
             </label>
-            <div className="flex items-center gap-2 border border-gray-200 rounded-lg px-2 py-1.5">
+            <div className="flex items-center gap-2 border border-[#BABABA] rounded-lg px-2 py-1.5">
               <button
                 onClick={() => setPos(i, positions[i] - 1)}
                 className="text-gray-400 hover:text-gray-700 px-1 cursor-pointer"
@@ -188,7 +188,7 @@ export default function EnigmaCipher() {
             <label className="block text-sm text-[#848484] font-medium mb-1">
               Ring
             </label>
-            <div className="flex items-center gap-2 border border-gray-200 rounded-lg px-2 py-1.5">
+            <div className="flex items-center gap-2 border border-[#BABABA] rounded-lg px-2 py-1.5">
               <button
                 onClick={() => setRing(i, rings[i] - 1)}
                 className="text-gray-400 hover:text-gray-700 px-1 cursor-pointer"
@@ -220,7 +220,7 @@ export default function EnigmaCipher() {
         </label>
         <textarea
           rows={7}
-          className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm resize-none focus:outline-none focus:border-[#58B509] transition-all placeholder:text-[#B6B6B6] drop-shadow-sm"
+          className="w-full border border-[#BABABA] rounded-lg px-4 py-3 text-sm resize-none focus:outline-none focus:border-[#58B509] transition-all placeholder:text-[#B6B6B6] drop-shadow-sm"
           style={{ padding: "10px" }}
           placeholder={`Masukkan ${mode === "encrypt" ? "plaintext" : "ciphertext"} disini`}
           value={text}
@@ -230,7 +230,7 @@ export default function EnigmaCipher() {
 
       <button
         onClick={handleProcess}
-        className="w-full bg-[#4caf50] hover:bg-[#43a047] text-white font-semibold py-3 rounded-xl transition-colors cursor-pointer"
+        className="w-full bg-[#58B509] hover:bg-[#51A608] text-white font-semibold py-3 rounded-lg transition-colors cursor-pointer"
       >
         {mode === "encrypt" ? "Enkode" : "Dekode"}
       </button>

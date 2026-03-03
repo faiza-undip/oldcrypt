@@ -115,7 +115,7 @@ export default function VigenereCipher() {
           Key
         </label>
         <input
-          className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#58B509] drop-shadow-sm"
+          className="w-full border border-[#BABABA] rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#58B509] drop-shadow-sm"
           value={key}
           onChange={(e) => setKey(e.target.value)}
         />
@@ -132,7 +132,7 @@ export default function VigenereCipher() {
         </label>
         <textarea
           rows={7}
-          className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm resize-none focus:outline-none focus:border-[#58B509] transition-all placeholder:text-[#B6B6B6] drop-shadow-sm"
+          className="w-full border border-[#BABABA] rounded-lg px-4 py-3 text-sm resize-none focus:outline-none focus:border-[#58B509] transition-all placeholder:text-[#B6B6B6] drop-shadow-sm"
           style={{ padding: "10px" }}
           placeholder={`Masukkan ${mode === "encrypt" ? "plaintext" : "ciphertext"} disini`}
           value={text}
@@ -142,7 +142,7 @@ export default function VigenereCipher() {
 
       <button
         onClick={handleProcess}
-        className="w-full bg-[#4caf50] hover:bg-[#43a047] text-white font-semibold py-3 rounded-xl transition-colors cursor-pointer"
+        className="w-full bg-[#58B509] hover:bg-[#51A608] text-white font-semibold py-3 rounded-lg transition-colors cursor-pointer"
       >
         {mode === "encrypt" ? "Enkode" : "Dekode"}
       </button>

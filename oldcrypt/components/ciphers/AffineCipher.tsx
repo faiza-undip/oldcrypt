@@ -121,7 +121,7 @@ export default function AffineCipher() {
               variant="success"
             />
 
-            <div className="mt-2 border border-gray-200 rounded-lg px-3 py-3 text-sm text-center w-10 h-10 flex items-center drop-shadow-sm">
+            <div className="mt-2 border border-[#BABABA] rounded-lg px-3 py-3 text-sm text-center w-10 h-10 flex items-center drop-shadow-sm">
               {a}
             </div>
           </div>
@@ -147,7 +147,7 @@ export default function AffineCipher() {
               variant="success"
             />
 
-            <div className="mt-2 border border-gray-200 rounded-lg px-3 py-3 text-sm text-center w-10 h-10 flex items-center drop-shadow-sm">
+            <div className="mt-2 border border-[#BABABA] rounded-lg px-3 py-3 text-sm text-center w-10 h-10 flex items-center drop-shadow-sm">
               {b}
             </div>
           </div>
@@ -165,7 +165,7 @@ export default function AffineCipher() {
         </label>
         <textarea
           rows={7}
-          className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm resize-none focus:outline-none focus:border-[#58B509] transition-all placeholder:text-[#B6B6B6] drop-shadow-sm"
+          className="w-full border border-[#BABABA] rounded-lg px-4 py-3 text-sm resize-none focus:outline-none focus:border-[#58B509] transition-all placeholder:text-[#B6B6B6] drop-shadow-sm"
           style={{ padding: "10px" }}
           placeholder={`Masukkan ${mode === "encrypt" ? "plaintext" : "ciphertext"} disini`}
           value={text}

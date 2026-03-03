@@ -20,6 +20,11 @@ export const playfair = Playfair({
 export const metadata: Metadata = {
   title: "OldCrypt",
   description: "Implementasi kriptografi klasik berbasis web",
+  icons: {
+    icon: "/oldcrypt-logo.png",
+    shortcut: "/oldcrypt-logo.png",
+    apple: "/oldcrypt-logo.png",
+  },
 };
 
 export default function RootLayout({
