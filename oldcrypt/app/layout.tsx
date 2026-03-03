@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "OldCrypt",
-  description: "Classical Cipher Encryption & Decryption",
+  description: "Implementasi kriptografi klasik berbasis web",
 };
 
 export default function RootLayout({
@@ -12,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="id">
       <body>{children}</body>
     </html>
   );

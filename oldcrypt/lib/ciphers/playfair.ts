@@ -1,42 +1,79 @@
-function modInverse(a: number, m: number): number {
-  for (let x = 1; x < m; x++) {
-    if ((a * x) % m === 1) return x;
-  }
-  throw new Error(`No modular inverse for a=${a}, m=${m}`);
-}
-
-export function affineEncrypt(plaintext: string, a: number, b: number): string {
-  let result = '';
-  for (const ch of plaintext) {
-    if (/[a-zA-Z]/.test(ch)) {
-      const isUpper = ch === ch.toUpperCase();
-      const base = isUpper ? 65 : 97;
-      const x = ch.charCodeAt(0) - base;
-      result += String.fromCharCode(((a * x + b) % 26) + base);
-    } else {
-      result += ch;
+export function buildPlayfairSquare(key: string): string[][] {
+  const cleaned = key
+    .toUpperCase()
+    .replace(/[^A-Z]/g, "")
+    .replace(/J/g, "I");
+  const seen = new Set<string>();
+  const chars: string[] = [];
+  for (const ch of cleaned + "ABCDEFGHIKLMNOPQRSTUVWXYZ") {
+    if (!seen.has(ch)) {
+      seen.add(ch);
+      chars.push(ch);
     }
   }
-  return result;
+  const grid: string[][] = [];
+  for (let i = 0; i < 5; i++) grid.push(chars.slice(i * 5, i * 5 + 5));
+  return grid;
 }
 
-export function affineDecrypt(ciphertext: string, a: number, b: number): string {
-  const aInv = modInverse(a, 26);
-  let result = '';
-  for (const ch of ciphertext) {
-    if (/[a-zA-Z]/.test(ch)) {
-      const isUpper = ch === ch.toUpperCase();
-      const base = isUpper ? 65 : 97;
-      const y = ch.charCodeAt(0) - base;
-      result += String.fromCharCode((aInv * (y - b + 26) % 26) + base);
+function findPos(grid: string[][], ch: string): [number, number] {
+  for (let r = 0; r < 5; r++)
+    for (let c = 0; c < 5; c++) if (grid[r][c] === ch) return [r, c];
+  return [-1, -1];
+}
+
+function prepareText(text: string): string[] {
+  const upper = text
+    .toUpperCase()
+    .replace(/[^A-Z]/g, "")
+    .replace(/J/g, "I");
+  const pairs: string[] = [];
+  let i = 0;
+  while (i < upper.length) {
+    const a = upper[i];
+    const b = i + 1 < upper.length ? upper[i + 1] : "X";
+    if (a === b) {
+      pairs.push(a + "X");
+      i++;
     } else {
-      result += ch;
+      pairs.push(a + b);
+      i += 2;
     }
   }
-  return result;
+  if (pairs.length > 0) {
+    const last = pairs[pairs.length - 1];
+    if (last.length === 1) pairs[pairs.length - 1] = last + "X";
+  }
+  return pairs;
 }
 
-export function isValidAffineA(a: number): boolean {
-  const validA = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25];
-  return validA.includes(a);
+export function playfairEncrypt(plaintext: string, key: string): string {
+  const grid = buildPlayfairSquare(key);
+  const pairs = prepareText(plaintext);
+  return pairs
+    .map(([a, b]) => {
+      const [r1, c1] = findPos(grid, a);
+      const [r2, c2] = findPos(grid, b);
+      if (r1 === r2) return grid[r1][(c1 + 1) % 5] + grid[r2][(c2 + 1) % 5];
+      if (c1 === c2) return grid[(r1 + 1) % 5][c1] + grid[(r2 + 1) % 5][c2];
+      return grid[r1][c2] + grid[r2][c1];
+    })
+    .join("");
+}
+
+export function playfairDecrypt(ciphertext: string, key: string): string {
+  const grid = buildPlayfairSquare(key);
+  const upper = ciphertext.toUpperCase().replace(/[^A-Z]/g, "");
+  const pairs: [string, string][] = [];
+  for (let i = 0; i < upper.length; i += 2)
+    pairs.push([upper[i], upper[i + 1] ?? "X"]);
+  return pairs
+    .map(([a, b]) => {
+      const [r1, c1] = findPos(grid, a);
+      const [r2, c2] = findPos(grid, b);
+      if (r1 === r2) return grid[r1][(c1 + 4) % 5] + grid[r2][(c2 + 4) % 5];
+      if (c1 === c2) return grid[(r1 + 4) % 5][c1] + grid[(r2 + 4) % 5][c2];
+      return grid[r1][c2] + grid[r2][c1];
+    })
+    .join("");
 }
