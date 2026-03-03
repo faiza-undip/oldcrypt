@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import RangeSlider from "react-bootstrap-range-slider";
 
 import CipherLayout from "@/components/ui/CipherLayout";
@@ -11,7 +11,6 @@ import { CIPHER_TYPES } from "@/constants/cipherTypes";
 
 export default function AffineCipher() {
   const router = useRouter();
-  const pathname = usePathname();
 
   const [mode, setMode] = useState<"encrypt" | "decrypt">("encrypt");
   const [a, setA] = useState(5);
@@ -19,8 +18,6 @@ export default function AffineCipher() {
   const [text, setText] = useState("You had me at hello");
   const [output, setOutput] = useState("");
   const [error, setError] = useState("");
-
-  const currentCipher = pathname?.split("/")[2] ?? "affine";
 
   const handleProcess = () => {
     if (!isValidA(a)) {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import CipherLayout from "@/components/ui/CipherLayout";
 
@@ -14,7 +14,6 @@ type RotorName = (typeof ROTOR_NAMES)[number];
 
 export default function EnigmaCipher() {
   const router = useRouter();
-  const pathname = usePathname();
 
   const [mode, setMode] = useState<"encrypt" | "decrypt">("encrypt");
   const [text, setText] = useState("You had me at hello");
@@ -231,7 +230,7 @@ export default function EnigmaCipher() {
 
       <button
         onClick={handleProcess}
-        className="w-full bg-[#4caf50] hover:bg-[#43a047] text-white font-semibold py-3 rounded-xl transition-colors"
+        className="w-full bg-[#4caf50] hover:bg-[#43a047] text-white font-semibold py-3 rounded-xl transition-colors cursor-pointer"
       >
         {mode === "encrypt" ? "Enkode" : "Dekode"}
       </button>
