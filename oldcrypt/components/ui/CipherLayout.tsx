@@ -36,7 +36,7 @@ export default function CipherLayout({
     <div className="min-h-screen flex flex-col font-dm-sans overflow-x-hidden">
       {/* Navbar */}
       <nav className="bg-white border-b border-gray-100 sticky top-0 z-10">
-        <div className="flex items-center gap-12 px-4 sm:px-6 lg:px-8 py-4">
+        <div className="flex items-center gap-12 px-4 sm:px-6 lg:px-8 py-2">
           <div className="flex flex-row items-center">
             <Image
               className="mr-3 w-10 h-10"
@@ -51,26 +51,38 @@ export default function CipherLayout({
             </span>
           </div>
 
-          <div className="flex items-center gap-6">
+          {/* Tabs (underline pendek, center) */}
+          <div className="mt-5 flex items-center gap-10">
+            {/* Enkode */}
             <button
+              type="button"
               onClick={() => onModeChange("encrypt")}
-              className={`text-sm font-medium pb-1 border-b-2 font-dm-sans transition-colors cursor-pointer ${
+              className={`relative pb-4 text-sm font-medium transition-colors cursor-pointer ${
                 mode === "encrypt"
-                  ? "border-[#559520] text-[#559520]"
-                  : "border-transparent text-gray-500 hover:text-gray-800"
+                  ? "text-[#559520]"
+                  : "text-gray-800 hover:text-gray-900"
               }`}
             >
               Enkode
+              {mode === "encrypt" && (
+                <span className="absolute left-1/2 -translate-x-1/2 -bottom-2 h-[3px] w-24 rounded-full bg-[#7EC844]" />
+              )}
             </button>
+
+            {/* Dekode */}
             <button
+              type="button"
               onClick={() => onModeChange("decrypt")}
-              className={`text-sm font-medium pb-1 border-b-2 transition-colors cursor-pointer ${
+              className={`relative pb-4 text-sm font-medium transition-colors cursor-pointer ${
                 mode === "decrypt"
-                  ? "border-[#559520] text-[#559520]"
-                  : "border-transparent text-gray-500 hover:text-gray-800"
+                  ? "text-[#559520]"
+                  : "text-gray-800 hover:text-gray-900"
               }`}
             >
               Dekode
+              {mode === "decrypt" && (
+                <span className="absolute left-1/2 -translate-x-1/2 -bottom-2 h-[3px] w-24 rounded-full bg-[#7EC844]" />
+              )}
             </button>
           </div>
         </div>
@@ -128,7 +140,7 @@ export default function CipherLayout({
 
           {extra}
 
-          {/* Footer: aman di semua ukuran layar */}
+          {/* Footer */}
           <footer className="mt-auto text-right text-xs text-gray-400 pt-6">
             Made with ❤️ by Faiza
             <br />
